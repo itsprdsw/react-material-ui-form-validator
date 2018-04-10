@@ -4,19 +4,13 @@
 [![npm version](https://badge.fury.io/js/react-material-ui-form-validator.svg)](https://badge.fury.io/js/react-material-ui-form-validator)
 [![Build Status](https://travis-ci.org/NewOldMax/react-material-ui-form-validator.svg?branch=master)](https://travis-ci.org/NewOldMax/react-material-ui-form-validator)
 
-## Warning
-
-Core validation was moved to [react-form-validator-core](https://www.npmjs.com/package/react-form-validator-core) package. ~~You need install it in order to use this package~~
-Compatible version will be installed automatically.
-
 ### [Demo](https://newoldmax.github.io/react-material-ui-form-validator/)
 
 ### Versions
-+ <= 1.x - supports material-ui <= 0.x
-+ => 2.x - supports material-ui >= 1.x (experimental support, you can install it by ``npm i react-material-ui-form-validator@next``)
-+ => 1.0.1 - supports React 16
++ 0.x - supports material-ui <= 0.x
++ 1.x - supports material-ui >= 1.x (experimental support, you can install it by ``npm i react-material-ui-form-validator@next``)
 
-Implementation of [react-form-validator-core](https://www.npmjs.com/package/react-form-validator-core) for [material-ui](http://www.material-ui.com)
+Simple form validation component for material-ui library inspired by [formsy-react](https://github.com/christianalfoni/formsy-react)
 
 Supported types:
 + Text ([TextValidator](https://github.com/NewOldMax/react-material-ui-form-validator/blob/master/src/TextValidator.jsx))
@@ -24,6 +18,18 @@ Supported types:
 + AutoComplete ([AutoCompleteValidator](https://github.com/NewOldMax/react-material-ui-form-validator/blob/master/src/AutoCompleteValidator.jsx))
 + Date ([DateValidator](https://github.com/NewOldMax/react-material-ui-form-validator/blob/master/src/DateValidator.jsx))
 + Time ([TimeValidator](https://github.com/NewOldMax/react-material-ui-form-validator/blob/master/src/TimeValidator.jsx))
+
+Default validation rules:
++ matchRegexp
++ isEmail
++ isEmpty
++ required
++ trim
++ isNumber
++ isFloat
++ isPositive
++ minNumber
++ maxNumber
 
 Some rules can accept extra parameter, example:
 ````javascript
@@ -47,13 +53,13 @@ Your component must [provide a theme](http://www.material-ui.com/#/get-started/u
 
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 class MyForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -95,7 +101,7 @@ You can add your custom rules:
 
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 class ResetPasswordForm extends React.Component {
 
@@ -222,6 +228,26 @@ export default CheckboxValidatorElement;
 ````
 
 ##### [Advanced usage](https://github.com/NewOldMax/react-material-ui-form-validator/wiki)
+
+### API
+
+#### ValidatorForm
+
+| Prop            | Required | Type     | Default value | Description                                                                                                                  |
+|-----------------|----------|----------|---------------|------------------------------------------------------------------------------------------------------------------------------|
+| onSubmit        | true     | function |               | Callback for form that fires when all validations are passed                                                                 |
+| instantValidate | false    | bool     | true          | If true, form will be validated after each field change. If false, form will be validated only after clicking submit button. |
+| onError         | false    | function |               | Callback for form that fires when some of validations are not passed. It will return array of elements which not valid. |
+
+#### All validated fields (ValidatorComponent)
+
+| Prop            | Required | Type     | Default value | Description                                                                            |
+|-----------------|----------|----------|---------------|----------------------------------------------------------------------------------------|
+| validators      | false    | array    |               | Array of validators. See list of default validators above.                             |
+| errorMessages   | false    | array    |               | Array of error messages. Order of messages should be the same as `validators` prop.    |
+| name            | true     | string   |               | Name of input                                                                          |
+| validatorListener | false  | function |               | It triggers after each validation. It will return `true` or `false`                    |
+
 
 ### Contributing
 
