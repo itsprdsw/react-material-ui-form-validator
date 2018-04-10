@@ -27,7 +27,7 @@
     "react-form-validator-core": "0.4.3"
   },
   "peerDependencies": {
-    "material-ui": "next",
+    "material-ui": "1.0.0-beta.41",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0",
     "prop-types": "^15.0.0"
